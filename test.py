@@ -24,11 +24,12 @@ class TestHello(unittest.TestCase):
         self.assertEqual(rv.status, '200 OK')
         self.assertIn(bytearray(f"{name}", 'utf-8'), rv.data)
         
-     def test_check_endpoint(self):
-        endpoint = 'posts'
-        rv = self.app.get(f'/{endpoint}')
-        self.assertEqual(rv.status, '200 OK')
-        self.assertIn(bytearray(f"{endpoint}", 'utf-8'), rv.data)
+    def test_check_endpoint(self):
+        endpoints = ['posts','users','groups']
+        for i in endpoints:
+            rv = self.app.get(f'/{i}')
+            self.assertEqual(rv.status, '200 OK')
+            self.assertIn(bytearray(f"{i}", 'utf-8'), rv.data)
 
 if __name__ == '__main__':
     import xmlrunner
